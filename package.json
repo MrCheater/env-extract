@@ -1,0 +1,44 @@
+{
+  "name": "json-env-extract",
+  "version": "1.0.0",
+  "description": "Extract environment variables",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "babel --source-maps --out-dir ./dist ./src",
+    "test": "jest",
+    "prettier": "prettier --write \"**/**.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrCheater/env-extract.git"
+  },
+  "keywords": [
+    "env",
+    "extract"
+  ],
+  "contributors": [
+    {
+      "name": "IhostVlad"
+    },
+    {
+      "name": "Mr.Cheater"
+    }
+  ],
+  "dependencies": {
+    "md5": "^2.2.1"
+  },
+  "devDependencies": {
+    "jest": "^22.4.4",
+    "babel-core": "^7.0.0-0",
+    "@babel/core": "^7.0.0-beta.47",
+    "@babel/cli": "^7.0.0-beta.47",
+    "@babel/preset-env": "^7.0.0-beta.47",
+    "@babel/preset-stage-0": "^7.0.0-beta.47",
+    "prettier": "^1.12.1"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrCheater/env-extract/issues"
+  },
+  "homepage": "https://github.com/MrCheater/env-extract#readme"
+}
