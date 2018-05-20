@@ -1,4 +1,4 @@
-import jsonEnvExtract from "../src";
+import envExtract from "../src";
 
 test("works correctly", () => {
   const inputText = `
@@ -9,19 +9,31 @@ test("works correctly", () => {
       b1: process.env.B1,
       "bcd": 'process.env.BCD',
       'a2': "process.env.A2",
-      b2: '\'process.env.B2'
+      b2: '\'process.env.B2',
       b3: "\"process.env.B3",
-      b4: "\"process.env.B4\""
+      b4: "\"process.env.B4\"",
+      json: {
+        "abc": process.env.ABC
+      }
     }
   `;
 
-  let { text, envs } = jsonEnvExtract(inputText);
+  const { text, envs } = envExtract(inputText, "$ref/envs/");
+
+  expect(text).toMatchSnapshot();
+  expect(envs).toMatchSnapshot();
 
   let result = text;
 
   for (const group in envs) {
-    const regex = new RegExp(`"${group}"`, "ig");
-    result = result.replace(regex, envs[group]);
+    let nextResult;
+    while (true) {
+      nextResult = result.replace(`"${group}"`, envs[group]);
+      if (result === nextResult) {
+        break;
+      }
+      result = nextResult;
+    }
   }
 
   expect(Object.values(envs)).toEqual([
