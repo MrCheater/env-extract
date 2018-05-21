@@ -10,7 +10,7 @@ export default (inputText, prefix = "") => {
     hash.update(group);
     const digest = `${prefix}${hash.digest("hex")}`;
     envs[digest] = group;
-    return `"${digest}"${trail}`;
+    return `{ "type": "env", "name": "${group}", "ref": "${digest}" }${trail}`;
   };
 
   const text = inputText.replace(regExp, replacer);
