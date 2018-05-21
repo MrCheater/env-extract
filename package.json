@@ -1,6 +1,6 @@
 {
   "name": "json-env-extract",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Extract environment variables",
   "main": "dist/index.js",
   "scripts": {
@@ -38,5 +38,8 @@
   "bugs": {
     "url": "https://github.com/MrCheater/json-env-extract/issues"
   },
-  "homepage": "https://github.com/MrCheater/json-env-extract#readme"
+  "homepage": "https://github.com/MrCheater/json-env-extract#readme",
+  "dependencies": {
+    "to-double-quotes": "^3.0.0"
+  }
 }

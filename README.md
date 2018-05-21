@@ -15,7 +15,8 @@ const inputText = `
   b4: "\"process.env.B4\"",
   json: {
     "abc": process.env.ABC
-  }
+  },
+  test: '""\'"process.env.ABC,\'"\'"'
 }
 `;
 
@@ -35,7 +36,8 @@ console.log(text);
   b4: "\"process.env.B4\"",
   json: {
     "abc": { "type": "env", "name": "process.env.ABC", "ref": "prefix/cdd814c371eef4408bab44025c0921610d18f14bd0df827cb68bc53318dc83d1" }
-  }
+  },
+  test: "\"\"'\"process.env.ABC,'\"'\""
 }
 */
 

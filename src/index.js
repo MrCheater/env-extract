@@ -1,6 +1,7 @@
+import toDoubleQuotes from "to-double-quotes";
 import crypto from "crypto";
 
-const regExp = /(process\.env\.(?:\w|_)(?:\w|\d|_)+?)(\s*(?:,|})(?=(?:[^"]*"[^"]*")*[^"]*$))/gim;
+const regExp = /(process\.env\.(?:\w|_)(?:\w|\d|_)+?)(\s*(?:,|})(?=(?:[^"]*(?<!\\)"[^"]*(?<!\\)")*[^"]*$))/gim;
 
 export default (inputText, prefix = "") => {
   const envs = {};
@@ -13,7 +14,7 @@ export default (inputText, prefix = "") => {
     return `{ "type": "env", "name": "${group}", "ref": "${digest}" }${trail}`;
   };
 
-  const text = inputText.replace(regExp, replacer);
+  const text = toDoubleQuotes(inputText).replace(regExp, replacer);
 
   return { text, envs };
 };
