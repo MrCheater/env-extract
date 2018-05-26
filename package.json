@@ -1,10 +1,10 @@
 {
   "name": "json-env-extract",
-  "version": "1.2.1",
+  "version": "1.3.1",
   "description": "Extract environment variables",
   "main": "dist/index.js",
   "scripts": {
-    "prepublish": "babel --source-maps --out-dir ./dist ./src",
+    "prepare": "babel --source-maps --out-dir ./dist ./src",
     "test": "jest",
     "prettier": "prettier --write \"**/**.js\""
   },
@@ -24,22 +24,22 @@
       "name": "Mr.Cheater"
     }
   ],
-  "devDependencies": {
-    "jest": "^22.4.4",
-    "babel-core": "^7.0.0-0",
-    "@babel/core": "^7.0.0-beta.47",
-    "@babel/cli": "^7.0.0-beta.47",
-    "@babel/preset-env": "^7.0.0-beta.47",
-    "@babel/preset-stage-0": "^7.0.0-beta.47",
-    "prettier": "^1.12.1",
+  "dependencies": {
+    "to-double-quotes": "^3.0.0",
     "json5": "^1.0.1"
+  },
+  "devDependencies": {
+    "jest": "^23.0.0",
+    "babel-core": "^7.0.0-0",
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/cli": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/preset-stage-0": "^7.0.0-beta.49",
+    "prettier": "^1.12.1"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MrCheater/json-env-extract/issues"
   },
-  "homepage": "https://github.com/MrCheater/json-env-extract#readme",
-  "dependencies": {
-    "to-double-quotes": "^3.0.0"
-  }
+  "homepage": "https://github.com/MrCheater/json-env-extract#readme"
 }

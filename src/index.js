@@ -1,20 +1,45 @@
-import toDoubleQuotes from "to-double-quotes";
+import JSON5 from "json5";
 import crypto from "crypto";
+import toDoubleQuotes from "to-double-quotes";
 
 const regExp = /(process\.env\.(?:\w|_)(?:\w|\d|_)+?)(\s*(?:,|})(?=(?:[^"]*(?<!\\)"[^"]*(?<!\\)")*[^"]*$))/gim;
 
-export default (inputText, prefix = "") => {
-  const envs = {};
+export const envKey = Symbol();
+
+export const extractEnv = text => {
+  const env = {};
 
   const replacer = (match, group, trail) => {
     const hash = crypto.createHash("sha256");
     hash.update(group);
-    const digest = `${prefix}${hash.digest("hex")}`;
-    envs[digest] = group;
-    return `{ "type": "env", "name": "${group}", "ref": "${digest}" }${trail}`;
+    const digest = `$${group}/${hash.digest("hex")}`;
+    env[digest] = group;
+    return `"${digest}"${trail}`;
   };
 
-  const text = toDoubleQuotes(inputText).replace(regExp, replacer);
+  const json = JSON5.parse(toDoubleQuotes(text).replace(regExp, replacer));
 
-  return { text, envs };
+  Object.defineProperty(json, envKey, {
+    value: env
+  });
+
+  return json;
+};
+
+export const injectEnv = json => {
+  let text = JSON.stringify(json, null, 2);
+
+  const env = json[envKey];
+
+  for (const digest of Object.keys(env)) {
+    while (true) {
+      let prevText = text;
+      text = text.replace(`"${digest}"`, env[digest]);
+      if (prevText === text) {
+        break;
+      }
+    }
+  }
+
+  return text;
 };

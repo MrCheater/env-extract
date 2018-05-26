@@ -1,9 +1,7 @@
-import JSON5 from "json5";
-
-import envExtract from "../src";
+import { extractEnv, injectEnv, envKey } from "../src";
 
 test("works correctly", () => {
-  const inputText = `
+  const text = `
     {
       "abc": process.env.ABC,
       "abc2": process.env.ABC,
@@ -21,24 +19,12 @@ test("works correctly", () => {
     }
   `;
 
-  const { text, envs } = envExtract(inputText, "prefix/");
+  const json = extractEnv(text);
 
-  expect(text).toMatchSnapshot();
-  expect(envs).toMatchSnapshot();
+  expect(json).toMatchSnapshot();
+  expect(json[envKey]).toMatchSnapshot();
 
-  const result = JSON5.parse(text);
+  const result = injectEnv(json);
 
-  expect(Object.values(envs)).toEqual([
-    "process.env.ABC",
-    "process.env.A1",
-    "process.env.B1"
-  ]);
-  expect(result.abc).toMatchObject({ type: "env", name: "process.env.ABC" });
-  expect(result.abc2).toMatchObject({ type: "env", name: "process.env.ABC" });
-  expect(result.a1).toMatchObject({ type: "env", name: "process.env.A1" });
-  expect(result.b1).toMatchObject({ type: "env", name: "process.env.B1" });
-  expect(result.json.abc).toMatchObject({
-    type: "env",
-    name: "process.env.ABC"
-  });
+  expect(result).toMatchSnapshot();
 });
