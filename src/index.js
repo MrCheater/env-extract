@@ -1,5 +1,6 @@
 import JSON5 from "json5";
 import crypto from "crypto";
+import deepForEach from "deep-for-each";
 import toDoubleQuotes from "to-double-quotes";
 
 const regExp = /(process\.env\.(?:\w|_)(?:\w|\d|_)+?)(\s*(?:,|})(?=(?:[^"]*(?<!\\)"[^"]*(?<!\\)")*[^"]*$))/gim;
@@ -23,6 +24,14 @@ export const extractEnv = text => {
     value: env
   });
 
+  deepForEach(json, value => {
+    try {
+      Object.defineProperty(value, envKey, {
+        value: env
+      });
+    } catch (e) {}
+  });
+
   return json;
 };
 
@@ -31,12 +40,14 @@ export const injectEnv = json => {
 
   const env = json[envKey];
 
-  for (const digest of Object.keys(env)) {
-    while (true) {
-      let prevText = text;
-      text = text.replace(`"${digest}"`, env[digest]);
-      if (prevText === text) {
-        break;
+  if (env) {
+    for (const digest of Object.keys(env)) {
+      while (true) {
+        let prevText = text;
+        text = text.replace(`"${digest}"`, env[digest]);
+        if (prevText === text) {
+          break;
+        }
       }
     }
   }
