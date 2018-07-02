@@ -15,6 +15,16 @@ test("works correctly", () => {
       json: {
         "abc": process.env.ABC
       },
+      array: [
+        process.env.ABC,
+        '\\'process.env.B2,',
+        {
+          "abc": process.env.ABC
+        },
+        {
+          b2: '\\'process.env.B2,'
+        }
+      ],
       test: '""\\'"process.env.ABC,\\'"\\'"'
     }
   `;

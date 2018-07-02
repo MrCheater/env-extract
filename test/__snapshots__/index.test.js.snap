@@ -6,6 +6,26 @@ Object {
   "a2": "process.env.A2,",
   "abc": "$process.env.ABC/cdd814c371eef4408bab44025c0921610d18f14bd0df827cb68bc53318dc83d1",
   "abc2": "$process.env.ABC/cdd814c371eef4408bab44025c0921610d18f14bd0df827cb68bc53318dc83d1",
+  "array": Array [
+    "$process.env.ABC/cdd814c371eef4408bab44025c0921610d18f14bd0df827cb68bc53318dc83d1",
+    "'process.env.B2,",
+    Object {
+      "abc": "$process.env.ABC/cdd814c371eef4408bab44025c0921610d18f14bd0df827cb68bc53318dc83d1",
+      Symbol(): Object {
+        "$process.env.A1/658d36cb102359cca4ed408df7044db86894ae1698616794ce47c917c17c7354": "process.env.A1",
+        "$process.env.ABC/cdd814c371eef4408bab44025c0921610d18f14bd0df827cb68bc53318dc83d1": "process.env.ABC",
+        "$process.env.B1/db25dd79c3bcb3e417489f39b20ca768dc1e14c9b2d689e445350dc1fe886a52": "process.env.B1",
+      },
+    },
+    Object {
+      "b2": "'process.env.B2,",
+      Symbol(): Object {
+        "$process.env.A1/658d36cb102359cca4ed408df7044db86894ae1698616794ce47c917c17c7354": "process.env.A1",
+        "$process.env.ABC/cdd814c371eef4408bab44025c0921610d18f14bd0df827cb68bc53318dc83d1": "process.env.ABC",
+        "$process.env.B1/db25dd79c3bcb3e417489f39b20ca768dc1e14c9b2d689e445350dc1fe886a52": "process.env.B1",
+      },
+    },
+  ],
   "b1": "$process.env.B1/db25dd79c3bcb3e417489f39b20ca768dc1e14c9b2d689e445350dc1fe886a52",
   "b2": "'process.env.B2,",
   "b3": "\\"process.env.B3,",
@@ -50,6 +70,16 @@ exports[`works correctly 3`] = `
   \\"json\\": {
     \\"abc\\": process.env.ABC
   },
+  \\"array\\": [
+    process.env.ABC,
+    \\"'process.env.B2,\\",
+    {
+      \\"abc\\": process.env.ABC
+    },
+    {
+      \\"b2\\": \\"'process.env.B2,\\"
+    }
+  ],
   \\"test\\": \\"\\\\\\"\\\\\\"'\\\\\\"process.env.ABC,'\\\\\\"'\\\\\\"\\"
 }"
 `;
